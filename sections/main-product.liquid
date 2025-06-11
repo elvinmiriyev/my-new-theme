@@ -1,0 +1,41 @@
+{%- comment -%}
+Main Product Section
+PRD Features:
+- Multiple product views (various angles, close-ups)
+- Lifestyle mockups or videos
+- Consistent, professional backgrounds
+- Image optimization
+- Benefit-oriented product descriptions
+- Clear, scannable language
+- Detailed product specifications
+- Optional design storytelling
+- Product variants UI (dropdowns, swatches, etc.)
+- Prominent size guides
+{%- endcomment -%}
+
+<div x-data="{ active: 0 }" class="w-full max-w-2xl mx-auto">
+  <div class="flex flex-col items-center">
+    <div class="w-full aspect-square bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center mb-4">
+      <img
+        :src="'{{ product.images[active] | img_url: '800x' }}'"
+        :alt="'{{ product.images[active].alt | escape }}'"
+        width="{{ product.images[0].width }}"
+        height="{{ product.images[0].height }}"
+        class="object-contain w-full h-full transition-all duration-300"
+        loading="lazy"
+      />
+    </div>
+    <div class="flex gap-2 justify-center">
+      {% for image in product.images %}
+        <button type="button" @click="active = {{ forloop.index0 }}" :class="active === {{ forloop.index0 }} ? 'ring-2 ring-primary' : ''" class="focus:outline-none rounded overflow-hidden border border-gray-200 w-16 h-16">
+          <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}" class="object-cover w-full h-full" loading="lazy" />
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- TODO: Add lifestyle mockups/videos -->
+<!-- TODO: Render product description and specs -->
+<!-- TODO: Add product options UI -->
+<!-- TODO: Insert size guide snippet --> 

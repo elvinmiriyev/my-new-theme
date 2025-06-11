@@ -1,0 +1,22 @@
+{
+  "name": "my-new-theme",
+  "version": "1.0.0",
+  "description": "Minimal starter Shopify theme for development from scratch.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "em:elvinmiriyev/my-new-theme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "@tailwindcss/postcss": "^4.1.10",
+    "alpinejs": "^3.14.9",
+    "tailwindcss": "^4.1.10"
+  }
+}
