@@ -1,0 +1,17 @@
+{
+  "name": "Home page",
+  "sections": {
+    "hero": { "type": "hero" },
+    "promo-banner": { "type": "promo-banner" },
+    "featured-products": { "type": "featured-products" },
+    "lookbook": { "type": "lookbook" },
+    "email-signup": { "type": "email-signup" }
+  },
+  "order": [
+    "hero",
+    "promo-banner",
+    "featured-products",
+    "lookbook",
+    "email-signup"
+  ]
+} 
