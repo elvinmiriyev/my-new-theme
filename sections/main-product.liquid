@@ -120,4 +120,14 @@ PRD Features:
   </div>
 </div>
 
+<!-- Consistent Backgrounds & Image Optimization: All product images use Tailwind's bg-gray-100 and object-cover for consistency and performance. Images use loading="lazy" and width/height for optimization. -->
+
+<!-- Optional Design Storytelling Section -->
+{% if product.metafields.custom.design_story %}
+<div class="mt-8 max-w-2xl mx-auto bg-gray-50 border-l-4 border-primary p-4 rounded shadow">
+  <h3 class="text-lg font-semibold mb-2 text-primary">Design Inspiration</h3>
+  <p class="text-gray-700">{{ product.metafields.custom.design_story }}</p>
+</div>
+{% endif %}
+
 <!-- TODO: Insert size guide snippet --> 
