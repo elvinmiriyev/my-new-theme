@@ -109,4 +109,15 @@ PRD Features:
 </div>
 {% endif %}
 
+<!-- Size Guide (Expandable) -->
+<div class="mt-6 max-w-2xl mx-auto">
+  <button x-data="{ open: false }" @click="open = !open" type="button" class="flex items-center gap-2 text-primary font-semibold underline focus:outline-none">
+    <span>View Size Guide</span>
+    <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </button>
+  <div x-show="open" x-transition class="mt-2 bg-gray-50 border border-gray-200 rounded p-4">
+    {% render 'size-guide' %}
+  </div>
+</div>
+
 <!-- TODO: Insert size guide snippet --> 
