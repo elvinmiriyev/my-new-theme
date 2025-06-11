@@ -82,5 +82,31 @@ PRD Features:
   </div>
 </div>
 
-<!-- TODO: Add product options UI -->
+<!-- Product Options UI -->
+{% if product.options_with_values.size > 0 %}
+<div class="mt-10 max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
+  <h3 class="text-lg font-semibold mb-4">Choose Options</h3>
+  <form id="product-options-form">
+    {% for option in product.options_with_values %}
+      <div class="mb-4">
+        <label class="block font-medium mb-1">{{ option.name }}</label>
+        {% if option.name == 'Color' %}
+          <div class="flex gap-2">
+            {% for value in option.values %}
+              <button type="button" class="w-8 h-8 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" style="background-color: {{ value | downcase }};" aria-label="{{ value }}"></button>
+            {% endfor %}
+          </div>
+        {% else %}
+          <select name="option-{{ option.position }}" class="block w-full border border-gray-300 rounded px-3 py-2 focus:ring-primary focus:border-primary">
+            {% for value in option.values %}
+              <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+          </select>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </form>
+</div>
+{% endif %}
+
 <!-- TODO: Insert size guide snippet --> 
