@@ -4,4 +4,15 @@ PRD Features:
 - Prominent email signup form for newsletters and marketing
 {%- endcomment -%}
 
-<!-- TODO: Implement email signup form --> 
+<!-- TODO: Implement email signup form -->
+
+{% schema %}
+{
+  "name": "Email Signup",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Sign up for our newsletter" },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Get updates and special offers" }
+  ],
+  "presets": [ { "name": "Email Signup" } ]
+}
+{% endschema %} 

@@ -4,4 +4,15 @@ PRD Features:
 - Configurable promotional banners or pop-ups for sales, discounts, new arrivals
 {%- endcomment -%}
 
-<!-- TODO: Implement promotional banner/pop-up --> 
+<!-- TODO: Implement promotional banner/pop-up -->
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Banner Text", "default": "Free shipping on orders over $50!" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#fbbf24" }
+  ],
+  "presets": [ { "name": "Promo Banner" } ]
+}
+{% endschema %} 

@@ -4,4 +4,18 @@ PRD Features:
 - Impactful hero section (image/video), clear headline, prominent CTAs
 {%- endcomment -%}
 
-<!-- TODO: Implement hero section with headline and CTA --> 
+<!-- TODO: Implement hero section with headline and CTA -->
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Welcome to our store!" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Shop the latest products" },
+    { "type": "image_picker", "id": "image", "label": "Hero Image" },
+    { "type": "url", "id": "cta_link", "label": "CTA Link" },
+    { "type": "text", "id": "cta_label", "label": "CTA Label", "default": "Shop Now" }
+  ],
+  "presets": [ { "name": "Hero" } ]
+}
+{% endschema %} 
