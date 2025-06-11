@@ -13,121 +13,134 @@ PRD Features:
 - Prominent size guides
 {%- endcomment -%}
 
-<div x-data="{ active: 0 }" class="w-full max-w-2xl mx-auto">
-  <div class="flex flex-col items-center">
-    <div class="w-full aspect-square bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center mb-4">
-      <img
-        :src="'{{ product.images[active] | img_url: '800x' }}'"
-        :alt="'{{ product.images[active].alt | escape }}'"
-        width="{{ product.images[0].width }}"
-        height="{{ product.images[0].height }}"
-        class="object-contain w-full h-full transition-all duration-300"
-        loading="lazy"
-      />
-    </div>
-    <div class="flex gap-2 justify-center">
-      {% for image in product.images %}
-        <button type="button" @click="active = {{ forloop.index0 }}" :class="active === {{ forloop.index0 }} ? 'ring-2 ring-primary' : ''" class="focus:outline-none rounded overflow-hidden border border-gray-200 w-16 h-16">
-          <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}" class="object-cover w-full h-full" loading="lazy" />
-        </button>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
-<!-- Lifestyle Mockups / Videos -->
-<div class="mt-8 flex flex-col md:flex-row gap-6 items-center justify-center">
-  <!-- Example lifestyle image -->
-  <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Lifestyle mockup" class="rounded-lg shadow-md w-full max-w-xs object-cover" loading="lazy" width="400" height="600" />
-  <!-- Example lifestyle video -->
-  <video controls class="rounded-lg shadow-md w-full max-w-xs object-cover" poster="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80">
-    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</div>
-
-<!-- Product Description & Specifications -->
-<div class="mt-10 bg-white rounded-lg shadow p-6 max-w-2xl mx-auto">
-  <h2 class="text-2xl font-bold mb-2">{{ product.title }}</h2>
-  <p class="text-lg text-gray-700 mb-4">{{ product.metafields.custom.benefit_description | default: product.description }}</p>
-  {% if product.metafields.custom.benefit_bullets %}
-    <ul class="list-disc list-inside text-gray-800 mb-4 space-y-1">
-      {% for bullet in product.metafields.custom.benefit_bullets.value %}
-        <li>{{ bullet }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  <div class="border-t pt-4 mt-4">
-    <h3 class="text-lg font-semibold mb-2">Product Details</h3>
-    <table class="w-full text-left text-sm">
-      <tbody>
-        <tr>
-          <th class="pr-4 py-1 text-gray-600 font-medium">Material</th>
-          <td class="py-1">{{ product.metafields.custom.material | default: 'See product details' }}</td>
-        </tr>
-        <tr>
-          <th class="pr-4 py-1 text-gray-600 font-medium">Sizes</th>
-          <td class="py-1">{{ product.metafields.custom.sizes | default: 'See size guide' }}</td>
-        </tr>
-        <tr>
-          <th class="pr-4 py-1 text-gray-600 font-medium">Care</th>
-          <td class="py-1">{{ product.metafields.custom.care | default: 'See care instructions' }}</td>
-        </tr>
-        <tr>
-          <th class="pr-4 py-1 text-gray-600 font-medium">Dimensions</th>
-          <td class="py-1">{{ product.metafields.custom.dimensions | default: 'See product details' }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- Product Options UI -->
-{% if product.options_with_values.size > 0 %}
-<div class="mt-10 max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-  <h3 class="text-lg font-semibold mb-4">Choose Options</h3>
-  <form id="product-options-form">
-    {% for option in product.options_with_values %}
-      <div class="mb-4">
-        <label class="block font-medium mb-1">{{ option.name }}</label>
-        {% if option.name == 'Color' %}
-          <div class="flex gap-2">
-            {% for value in option.values %}
-              <button type="button" class="w-8 h-8 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" style="background-color: {{ value | downcase }};" aria-label="{{ value }}"></button>
-            {% endfor %}
-          </div>
-        {% else %}
-          <select name="option-{{ option.position }}" class="block w-full border border-gray-300 rounded px-3 py-2 focus:ring-primary focus:border-primary">
-            {% for value in option.values %}
-              <option value="{{ value }}">{{ value }}</option>
-            {% endfor %}
-          </select>
-        {% endif %}
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <div class="flex flex-col lg:flex-row gap-10">
+    <!-- Left: Gallery & Lifestyle -->
+    <div class="flex-1 min-w-0">
+      <!-- Product Gallery (already implemented) -->
+      <div x-data="{ active: 0 }" class="mb-6">
+        <div class="w-full aspect-square bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center mb-4">
+          <img
+            :src="'{{ product.images[active] | img_url: '800x' }}'"
+            :alt="'{{ product.images[active].alt | escape }}'"
+            width="{{ product.images[0].width }}"
+            height="{{ product.images[0].height }}"
+            class="object-contain w-full h-full transition-all duration-300"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex gap-2 justify-center">
+          {% for image in product.images %}
+            <button type="button" @click="active = {{ forloop.index0 }}" :class="active === {{ forloop.index0 }} ? 'ring-2 ring-primary' : ''" class="focus:outline-none rounded overflow-hidden border border-gray-200 w-16 h-16">
+              <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt | escape }}" width="{{ image.width }}" height="{{ image.height }}" class="object-cover w-full h-full" loading="lazy" />
+            </button>
+          {% endfor %}
+        </div>
       </div>
-    {% endfor %}
-  </form>
-</div>
-{% endif %}
-
-<!-- Size Guide (Expandable) -->
-<div class="mt-6 max-w-2xl mx-auto">
-  <button x-data="{ open: false }" @click="open = !open" type="button" class="flex items-center gap-2 text-primary font-semibold underline focus:outline-none">
-    <span>View Size Guide</span>
-    <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-  </button>
-  <div x-show="open" x-transition class="mt-2 bg-gray-50 border border-gray-200 rounded p-4">
-    {% render 'size-guide' %}
+      <!-- Lifestyle Mockups / Videos (already implemented) -->
+      <div class="mt-8 flex flex-col md:flex-row gap-6 items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Lifestyle mockup" class="rounded-lg shadow-md w-full max-w-xs object-cover" loading="lazy" width="400" height="600" />
+        <video controls class="rounded-lg shadow-md w-full max-w-xs object-cover" poster="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+    <!-- Right: Info, Options, CTAs -->
+    <div class="flex-1 min-w-0 flex flex-col gap-6">
+      <!-- Title & Price -->
+      <div>
+        <h1 class="text-3xl font-bold mb-2">{{ product.title }}</h1>
+        <div class="text-2xl text-primary font-semibold mb-4">{{ product.price | money }}</div>
+      </div>
+      <!-- Product Options UI (already implemented) -->
+      {% if product.options_with_values.size > 0 %}
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-lg font-semibold mb-4">Choose Options</h3>
+        <form id="product-options-form">
+          {% for option in product.options_with_values %}
+            <div class="mb-4">
+              <label class="block font-medium mb-1">{{ option.name }}</label>
+              {% if option.name == 'Color' %}
+                <div class="flex gap-2">
+                  {% for value in option.values %}
+                    <button type="button" class="w-8 h-8 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary" style="background-color: {{ value | downcase }};" aria-label="{{ value }}"></button>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <select name="option-{{ option.position }}" class="block w-full border border-gray-300 rounded px-3 py-2 focus:ring-primary focus:border-primary">
+                  {% for value in option.values %}
+                    <option value="{{ value }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </form>
+      </div>
+      {% endif %}
+      <!-- Add to Cart CTA -->
+      <button class="w-full py-3 px-6 bg-primary text-white text-lg font-bold rounded shadow hover:bg-primary/90 transition">Add to Cart</button>
+      <!-- Trust Badges -->
+      <div class="mt-4">
+        {% render 'trust-badges' %}
+      </div>
+      <!-- Size Guide (Expandable, already implemented) -->
+      <div class="mt-6">
+        <button x-data="{ open: false }" @click="open = !open" type="button" class="flex items-center gap-2 text-primary font-semibold underline focus:outline-none">
+          <span>View Size Guide</span>
+          <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div x-show="open" x-transition class="mt-2 bg-gray-50 border border-gray-200 rounded p-4">
+          {% render 'size-guide' %}
+        </div>
+      </div>
+      <!-- Product Description & Specs (already implemented) -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-2xl font-bold mb-2">About this product</h2>
+        <p class="text-lg text-gray-700 mb-4">{{ product.metafields.custom.benefit_description | default: product.description }}</p>
+        {% if product.metafields.custom.benefit_bullets %}
+          <ul class="list-disc list-inside text-gray-800 mb-4 space-y-1">
+            {% for bullet in product.metafields.custom.benefit_bullets.value %}
+              <li>{{ bullet }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <div class="border-t pt-4 mt-4">
+          <h3 class="text-lg font-semibold mb-2">Product Details</h3>
+          <table class="w-full text-left text-sm">
+            <tbody>
+              <tr>
+                <th class="pr-4 py-1 text-gray-600 font-medium">Material</th>
+                <td class="py-1">{{ product.metafields.custom.material | default: 'See product details' }}</td>
+              </tr>
+              <tr>
+                <th class="pr-4 py-1 text-gray-600 font-medium">Sizes</th>
+                <td class="py-1">{{ product.metafields.custom.sizes | default: 'See size guide' }}</td>
+              </tr>
+              <tr>
+                <th class="pr-4 py-1 text-gray-600 font-medium">Care</th>
+                <td class="py-1">{{ product.metafields.custom.care | default: 'See care instructions' }}</td>
+              </tr>
+              <tr>
+                <th class="pr-4 py-1 text-gray-600 font-medium">Dimensions</th>
+                <td class="py-1">{{ product.metafields.custom.dimensions | default: 'See product details' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Optional Design Storytelling Section (already implemented) -->
+      {% if product.metafields.custom.design_story %}
+      <div class="mt-8 bg-gray-50 border-l-4 border-primary p-4 rounded shadow">
+        <h3 class="text-lg font-semibold mb-2 text-primary">Design Inspiration</h3>
+        <p class="text-gray-700">{{ product.metafields.custom.design_story }}</p>
+      </div>
+      {% endif %}
+    </div>
   </div>
 </div>
 
 <!-- Consistent Backgrounds & Image Optimization: All product images use Tailwind's bg-gray-100 and object-cover for consistency and performance. Images use loading="lazy" and width/height for optimization. -->
-
-<!-- Optional Design Storytelling Section -->
-{% if product.metafields.custom.design_story %}
-<div class="mt-8 max-w-2xl mx-auto bg-gray-50 border-l-4 border-primary p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-2 text-primary">Design Inspiration</h3>
-  <p class="text-gray-700">{{ product.metafields.custom.design_story }}</p>
-</div>
-{% endif %}
 
 <!-- TODO: Insert size guide snippet --> 
