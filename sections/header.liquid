@@ -5,5 +5,64 @@ PRD Features:
 - Smart search bar with predictive search and filters
 {%- endcomment -%}
 
+<header class="w-full bg-white shadow-sm sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 text-xl font-bold text-primary">
+      {% if section.settings.logo != blank %}
+        <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" class="h-8 w-auto" style="max-height:2rem;" width="120" height="32" />
+      {% else %}
+        <img src="{{ settings.logo | default: asset_url 'logo.png' }}" alt="{{ shop.name }}" class="h-8 w-auto" style="max-height:2rem;" width="120" height="32" />
+      {% endif %}
+      <span>{{ shop.name }}</span>
+    </a>
+    <!-- Navigation Menu -->
+    <nav class="hidden md:flex gap-8 text-base font-medium">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <a href="{{ block.settings.url }}" class="hover:text-primary">{{ block.settings.label }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="/collections/all" class="hover:text-primary">Shop</a>
+        <a href="/collections/new" class="hover:text-primary">New Arrivals</a>
+        <a href="/collections/sale" class="hover:text-primary">Sale</a>
+        <a href="/pages/about" class="hover:text-primary">About</a>
+        <a href="/pages/contact" class="hover:text-primary">Contact</a>
+      {% endif %}
+    </nav>
+    <!-- Search Bar -->
+    <form class="relative w-48 md:w-64" role="search" method="get" action="/search">
+      <input type="search" name="q" placeholder="Search products..." class="w-full border border-gray-300 rounded-full py-2 px-4 pl-10 focus:ring-primary focus:border-primary transition" autocomplete="off" />
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <!-- TODO: Add predictive search dropdown here -->
+    </form>
+    <!-- Mobile Menu Button (optional for future) -->
+    <button class="md:hidden ml-4 p-2 rounded focus:outline-none focus:ring-2 focus:ring-primary" aria-label="Open menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+
 <!-- TODO: Implement navigation menu -->
-<!-- TODO: Add smart search bar --> 
+<!-- TODO: Add smart search bar -->
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Navigation Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Link Label", "default": "Menu" },
+        { "type": "url", "id": "url", "label": "Link URL" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "Header" } ]
+}
+{% endschema %} 

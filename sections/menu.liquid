@@ -4,4 +4,28 @@ PRD Features:
 - Clear menu structure (categories, subcategories)
 {%- endcomment -%}
 
-<!-- TODO: Implement menu structure --> 
+<nav class="menu-section" style="text-align:center; padding:1rem 0;">
+  <ul style="display:inline-flex; gap:2rem; list-style:none; padding:0; margin:0;">
+    {% for block in section.blocks %}
+      <li><a href="{{ block.settings.url }}" style="text-decoration:none; color:#222; font-weight:500;">{{ block.settings.label }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+{% schema %}
+{
+  "name": "Menu",
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Menu Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Link Label", "default": "Menu" },
+        { "type": "url", "id": "url", "label": "Link URL" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [ { "name": "Menu" } ]
+}
+{% endschema %} 
