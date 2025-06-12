@@ -1,9 +1,9 @@
-To turn your prd.md (Product Requirements Document) into an actual Shopify theme, you’ll need to follow a structured development process. Here’s a step-by-step guide to help you move from requirements to a working Shopify theme:
+To turn your prd.md (Product Requirements Document) into an actual Shopify theme, you'll need to follow a structured development process. Here's a step-by-step guide to help you move from requirements to a working Shopify theme:
 1. Break Down the PRD into Tasks
 Go through each feature and requirement in your prd.md.
-Create a checklist or use a project management tool (like Trello, GitHub Issues, or Notion) to track each feature as a task (e.g., “Implement multiple product views”, “Add lifestyle mockups”, “Create size guide section”, etc.).
+Create a checklist or use a project management tool (like Trello, GitHub Issues, or Notion) to track each feature as a task (e.g., "Implement multiple product views", "Add lifestyle mockups", "Create size guide section", etc.).
 2. Set Up Your Development Environment
-Install Shopify CLI if you haven’t already.
+Install Shopify CLI if you haven't already.
 Log in to your Shopify Partner account and create a development store.
 Use the CLI to create a new theme or clone your existing starter theme:
 Apply
@@ -26,7 +26,7 @@ Reviews: Integrate with a reviews app or custom section/snippet
 5. Use Theme Settings for Customization
 In config/settings_schema.json, add settings for colors, fonts, logo, etc., as described in your PRD.
 6. Test Responsiveness and Performance
-Use Shopify’s preview and device emulation tools.
+Use Shopify's preview and device emulation tools.
 Optimize images and code for speed.
 7. Iterate and Review
 Check off each PRD requirement as you implement it.
@@ -39,7 +39,7 @@ Example: Turning a PRD Feature into Theme Code
 PRD Feature: F.1.1 Multiple Product Views: Each product page must display multiple high-resolution images showing the product from various angles.
 How to Implement:
 Edit sections/main-product.liquid (or similar) to loop through product.images and display them in a gallery or slider.
-Use a library like Flickity or Shopify’s built-in image gallery.
+Use a library like Flickity or Shopify's built-in image gallery.
 Sample Liquid Code:
 Apply
 Summary Table: PRD to Theme Mapping
@@ -66,14 +66,14 @@ Write sample code for specific features.
 
 $##Shopify Theme PRD Task List
 1. Product Presentation & Merchandising
-[ ] Implement multiple product views (various angles, close-ups)
-[ ] Add lifestyle mockups or videos to product pages
-[ ] Ensure all product images use consistent, professional backgrounds
-[ ] Optimize all images for web (compression, formats)
-[ ] Write benefit-oriented product descriptions
-[ ] Use clear, scannable language in product descriptions
-[ ] Include detailed product specifications (materials, sizes, care)
-[ ] Add optional design storytelling section
+[x] Implement multiple product views (various angles, close-ups) — Product gallery with TailwindCSS and Alpine.js, optimized images, consistent backgrounds. See commit 706da17.
+[x] Add lifestyle mockups or videos to product pages — Lifestyle image and video section with TailwindCSS. See commit 92c72c3.
+[x] Ensure all product images use consistent, professional backgrounds — All images use bg-gray-100 and object-cover. See commit 706da17.
+[x] Optimize all images for web (compression, formats) — Images use width, height, and loading="lazy". See commit 706da17.
+[x] Write benefit-oriented product descriptions — Conversion-focused description section using metafields. See commit 605b086.
+[x] Use clear, scannable language in product descriptions — Short paragraphs, bullet points, and headings. See commit 605b086.
+[x] Include detailed product specifications (materials, sizes, care) — Table of specs using metafields. See commit 605b086.
+[x] Add optional design storytelling section — Design story section if metafield exists. See commit 706da17.
 [ ] Present product variants with intuitive UI (dropdowns, swatches, etc.)
 [ ] Add prominent, easy-to-understand size guides to apparel pages
 2. User Experience & Navigation
@@ -118,3 +118,6 @@ Multi-vendor marketplace functionality
 [ ] Advanced personalization (recently viewed products)
 [ ] Loyalty program integration
 [ ] Gift card functionality
+
+- [x] Present product variants with intuitive UI (dropdowns, swatches, etc.) — Implemented in `sections/main-product.liquid` using TailwindCSS and Alpine.js. Color options use swatches, other options use dropdowns. See commit c709976.
+- [x] Add prominent, easy-to-understand size guides to apparel pages — Integrated as an expandable section with Alpine.js and TailwindCSS in `sections/main-product.liquid`. See commit a4b83a3.

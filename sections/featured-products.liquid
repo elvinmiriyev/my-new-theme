@@ -4,7 +4,25 @@ PRD Features:
 - Featured/bestseller sections on homepage and collections
 {%- endcomment -%}
 
-<!-- TODO: Implement featured/bestseller products display -->
+<section class="featured-products" style="padding: 3rem 1rem; background: #fff;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">{{ section.settings.heading }}</h2>
+  <div class="products-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; max-width:1200px; margin:0 auto;">
+    {% assign collection = collections[section.settings.collection] %}
+    {% if collection and collection.products.size > 0 %}
+      {% for product in collection.products limit: section.settings.products_to_show %}
+        <div class="product-card" style="border:1px solid #eee; border-radius:0.5rem; padding:1rem; text-align:center;">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" style="max-width:100%; height:auto; margin-bottom:1rem;" width="400" height="400" />
+            <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">{{ product.title }}</h3>
+            <span style="color:#111827; font-weight:bold;">{{ product.price | money }}</span>
+          </a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="grid-column:1/-1; text-align:center; color:#888;">No featured products found.</p>
+    {% endif %}
+  </div>
+</section>
 
 {% schema %}
 {

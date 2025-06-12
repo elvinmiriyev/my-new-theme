@@ -5,7 +5,24 @@ PRD Features:
 - "Shop the Look" functionality
 {%- endcomment -%}
 
-<!-- TODO: Implement interactive gallery/lookbook -->
+<section class="lookbook" style="padding: 3rem 1rem; background: #f3f4f6;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">{{ section.settings.heading }}</h2>
+  <div class="lookbook-gallery" style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center;">
+    {% for block in section.blocks %}
+      <div class="lookbook-image" style="flex:0 1 220px; text-align:center;">
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | img_url: '400x' }}" alt="Lookbook Image" style="max-width:100%; height:auto; border-radius:0.5rem; margin-bottom:0.5rem;" width="400" height="400" />
+        {% endif %}
+        {% if block.settings.caption != blank %}
+          <div style="color:#555; font-size:1rem;">{{ block.settings.caption }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    {% if section.blocks.size == 0 %}
+      <p style="text-align:center; color:#888; width:100%;">No lookbook images added yet.</p>
+    {% endif %}
+  </div>
+</section>
 
 {% schema %}
 {

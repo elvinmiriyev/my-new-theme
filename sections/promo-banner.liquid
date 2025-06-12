@@ -4,7 +4,9 @@ PRD Features:
 - Configurable promotional banners or pop-ups for sales, discounts, new arrivals
 {%- endcomment -%}
 
-<!-- TODO: Implement promotional banner/pop-up -->
+<section class="promo-banner" style="background: {{ section.settings.bg_color }}; color: #222; text-align: center; padding: 1rem 0; font-size: 1.1rem; font-weight: 500;">
+  {{ section.settings.text }}
+</section>
 
 {% schema %}
 {

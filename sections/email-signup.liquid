@@ -4,7 +4,16 @@ PRD Features:
 - Prominent email signup form for newsletters and marketing
 {%- endcomment -%}
 
-<!-- TODO: Implement email signup form -->
+<section class="email-signup" style="padding: 3rem 1rem; background: #fff; text-align:center;">
+  <h2 style="font-size:2rem; margin-bottom:1rem;">{{ section.settings.heading }}</h2>
+  <p style="color:#555; margin-bottom:2rem;">{{ section.settings.subtext }}</p>
+  <form method="post" action="/contact#contact_form" accept-charset="UTF-8" style="max-width:400px; margin:0 auto;">
+    <input type="hidden" name="form_type" value="customer" />
+    <input type="hidden" name="utf8" value="✓" />
+    <input type="email" name="contact[email]" placeholder="Your email address" required style="width:100%; padding:0.75rem; border:1px solid #ccc; border-radius:0.5rem; margin-bottom:1rem; font-size:1rem;" />
+    <button type="submit" style="width:100%; padding:0.75rem; background:#111827; color:#fff; border:none; border-radius:0.5rem; font-size:1rem; font-weight:bold;">Sign Up</button>
+  </form>
+</section>
 
 {% schema %}
 {
