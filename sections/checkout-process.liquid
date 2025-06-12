@@ -1,0 +1,50 @@
+{%- comment -%}
+Checkout Process Section for POD Store
+{%- endcomment -%}
+<div class="checkout-process" style="padding:2rem 0; max-width:700px; margin:0 auto;">
+  <h1 style="font-size:2rem; font-weight:700; margin-bottom:2rem;">Checkout</h1>
+  {% if section.settings.enable_custom_fields %}
+    <div class="custom-fields" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Custom Fields:</label>
+      <!-- TODO: Add custom checkout fields UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_order_summary %}
+    <div class="order-summary" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Order Summary:</label>
+      <!-- TODO: Add order summary UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_shipping_options %}
+    <div class="shipping-options" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Shipping Options:</label>
+      <!-- TODO: Add shipping options UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_payment_methods %}
+    <div class="payment-methods" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Payment Methods:</label>
+      <!-- TODO: Add payment methods UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_order_confirmation %}
+    <div class="order-confirmation" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Order Confirmation:</label>
+      <!-- TODO: Add order confirmation UI -->
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Checkout Process",
+  "settings": [
+    { "type": "checkbox", "id": "enable_custom_fields", "label": "Enable Custom Checkout Fields", "default": true },
+    { "type": "checkbox", "id": "enable_order_summary", "label": "Enable Order Summary", "default": true },
+    { "type": "checkbox", "id": "enable_shipping_options", "label": "Enable Shipping Options", "default": true },
+    { "type": "checkbox", "id": "enable_payment_methods", "label": "Enable Payment Methods", "default": true },
+    { "type": "checkbox", "id": "enable_order_confirmation", "label": "Enable Order Confirmation", "default": true }
+  ],
+  "presets": [ { "name": "Checkout Process" } ]
+}
+{% endschema %} 

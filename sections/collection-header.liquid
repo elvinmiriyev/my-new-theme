@@ -1,0 +1,31 @@
+{%- comment -%}
+Collection Header Section for POD Store
+{%- endcomment -%}
+<div class="collection-header" style="padding:2rem 0; text-align:center;">
+  {% if section.settings.show_image and collection.image %}
+    <img src="{{ collection.image | img_url: '800x' }}" alt="{{ collection.title }}" style="width:100%; max-width:600px; height:auto; border-radius:0.5rem; margin-bottom:1rem;" width="800" height="400" />
+  {% endif %}
+  <h1 style="font-size:2.5rem; font-weight:700; margin-bottom:0.5rem;">{{ collection.title }}</h1>
+  {% if section.settings.show_description and collection.description != blank %}
+    <p style="color:#555; max-width:600px; margin:0 auto 1.5rem auto;">{{ collection.description }}</p>
+  {% endif %}
+  {% if section.settings.show_filters %}
+    <!-- TODO: Add filter options UI -->
+  {% endif %}
+  {% if section.settings.show_sort %}
+    <!-- TODO: Add sort options UI -->
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Header",
+  "settings": [
+    { "type": "checkbox", "id": "show_image", "label": "Show Collection Image", "default": true },
+    { "type": "checkbox", "id": "show_description", "label": "Show Description", "default": true },
+    { "type": "checkbox", "id": "show_filters", "label": "Show Filter Options", "default": true },
+    { "type": "checkbox", "id": "show_sort", "label": "Show Sort Options", "default": true }
+  ],
+  "presets": [ { "name": "Collection Header" } ]
+}
+{% endschema %} 

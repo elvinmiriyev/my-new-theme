@@ -1,0 +1,49 @@
+{%- comment -%}
+Product Information Section for POD Store
+{%- endcomment -%}
+<div class="product-information" style="padding:2rem 0; max-width:700px; margin:0 auto;">
+  {% if section.settings.show_description %}
+    <div class="product-description" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Description</h2>
+      <p style="color:#555;">{{ product.description }}</p>
+    </div>
+  {% endif %}
+  {% if section.settings.show_specs %}
+    <div class="product-specs" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Specifications</h2>
+      {% render 'product-specs' %}
+    </div>
+  {% endif %}
+  {% if section.settings.show_care %}
+    <div class="product-care" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Care Instructions</h2>
+      <p style="color:#555;">{{ product.metafields.custom.care | default: 'See care instructions' }}</p>
+    </div>
+  {% endif %}
+  {% if section.settings.show_shipping %}
+    <div class="product-shipping" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Shipping Information</h2>
+      <p style="color:#555;">{{ product.metafields.custom.shipping | default: 'See shipping information' }}</p>
+    </div>
+  {% endif %}
+  {% if section.settings.show_size_guide %}
+    <div class="product-size-guide" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Size/Material Guide</h2>
+      {% render 'size-guide' %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": [
+    { "type": "checkbox", "id": "show_description", "label": "Show Description", "default": true },
+    { "type": "checkbox", "id": "show_specs", "label": "Show Specifications", "default": true },
+    { "type": "checkbox", "id": "show_care", "label": "Show Care Instructions", "default": true },
+    { "type": "checkbox", "id": "show_shipping", "label": "Show Shipping Information", "default": true },
+    { "type": "checkbox", "id": "show_size_guide", "label": "Show Size/Material Guide", "default": true }
+  ],
+  "presets": [ { "name": "Product Information" } ]
+}
+{% endschema %} 

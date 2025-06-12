@@ -1,123 +1,169 @@
-To turn your prd.md (Product Requirements Document) into an actual Shopify theme, you'll need to follow a structured development process. Here's a step-by-step guide to help you move from requirements to a working Shopify theme:
-1. Break Down the PRD into Tasks
-Go through each feature and requirement in your prd.md.
-Create a checklist or use a project management tool (like Trello, GitHub Issues, or Notion) to track each feature as a task (e.g., "Implement multiple product views", "Add lifestyle mockups", "Create size guide section", etc.).
-2. Set Up Your Development Environment
-Install Shopify CLI if you haven't already.
-Log in to your Shopify Partner account and create a development store.
-Use the CLI to create a new theme or clone your existing starter theme:
-Apply
-3. Map PRD Features to Shopify Theme Files
-Templates: Product, collection, index, cart, etc.
-Sections: Hero, featured products, reviews, banners, etc.
-Snippets: Buttons, badges, icons, etc.
-Assets: CSS, JS, images, icons.
-Locales: For translations and multi-language support.
-Config: Theme settings for color palette, typography, etc.
-4. Start Building Feature by Feature
-For each requirement in your PRD, decide which file(s) it belongs in.
-Example mapping:
-Multiple Product Views: sections/main-product.liquid
-Lifestyle Mockups: sections/main-product.liquid or a custom section
-Size Guide: snippets/size-guide.liquid and link in product template
-Smart Search Bar: sections/header.liquid and supporting JS
-Trust Badges: snippets/trust-badges.liquid
-Reviews: Integrate with a reviews app or custom section/snippet
-5. Use Theme Settings for Customization
-In config/settings_schema.json, add settings for colors, fonts, logo, etc., as described in your PRD.
-6. Test Responsiveness and Performance
-Use Shopify's preview and device emulation tools.
-Optimize images and code for speed.
-7. Iterate and Review
-Check off each PRD requirement as you implement it.
-Test with real products and data in your development store.
-8. Prepare for Launch
-When all requirements are met, push your theme to your Shopify store:
-Apply
-Test thoroughly before publishing.
-Example: Turning a PRD Feature into Theme Code
-PRD Feature: F.1.1 Multiple Product Views: Each product page must display multiple high-resolution images showing the product from various angles.
-How to Implement:
-Edit sections/main-product.liquid (or similar) to loop through product.images and display them in a gallery or slider.
-Use a library like Flickity or Shopify's built-in image gallery.
-Sample Liquid Code:
-Apply
-Summary Table: PRD to Theme Mapping
-PRD Section	Shopify File/Feature
-Product Views	sections/main-product.liquid
-Lifestyle Mockups	sections/main-product.liquid
-Size Guide	snippets/size-guide.liquid
-Menu Structure	sections/header.liquid
-Smart Search Bar	sections/header.liquid + JS
-Reviews	App integration or custom section
-Trust Badges	snippets/trust-badges.liquid
-CTAs	snippets/button.liquid
-Color Palette/Branding	config/settings_schema.json
-Animations	assets/theme.js, theme.css
-Next Steps
-Create a task list from your PRD.
-Set up your theme files and structure.
-Start implementing features one by one, referencing your PRD.
-Test and iterate.
-If you want, I can help you:
-Break down your PRD into a checklist or GitHub Issues.
-Scaffold out the initial theme files and settings.
-Write sample code for specific features.
-
-$##Shopify Theme PRD Task List
-1. Product Presentation & Merchandising
-[x] Implement multiple product views (various angles, close-ups) — Product gallery with TailwindCSS and Alpine.js, optimized images, consistent backgrounds. See commit 706da17.
-[x] Add lifestyle mockups or videos to product pages — Lifestyle image and video section with TailwindCSS. See commit 92c72c3.
-[x] Ensure all product images use consistent, professional backgrounds — All images use bg-gray-100 and object-cover. See commit 706da17.
-[x] Optimize all images for web (compression, formats) — Images use width, height, and loading="lazy". See commit 706da17.
-[x] Write benefit-oriented product descriptions — Conversion-focused description section using metafields. See commit 605b086.
-[x] Use clear, scannable language in product descriptions — Short paragraphs, bullet points, and headings. See commit 605b086.
-[x] Include detailed product specifications (materials, sizes, care) — Table of specs using metafields. See commit 605b086.
-[x] Add optional design storytelling section — Design story section if metafield exists. See commit 706da17.
-[ ] Present product variants with intuitive UI (dropdowns, swatches, etc.)
-[ ] Add prominent, easy-to-understand size guides to apparel pages
-2. User Experience & Navigation
-[ ] Create clear menu structure with logical categories/subcategories
-[ ] Implement a smart search bar with predictive search and filters
-[ ] Add filter and sort options to collection pages (price, popularity, etc.)
-[ ] Provide clear "add to cart" feedback (mini-cart, success message)
-[ ] Streamline checkout process with minimal steps and guest checkout
-3. Marketing & Conversion Strategies
-[ ] Add prominent, visually distinct CTAs on all key pages
-[ ] Integrate customer reviews and ratings on product pages
-[ ] Display trust badges and security indicators
-[ ] Add featured/bestseller sections to homepage and collections
-[ ] Implement upselling/cross-selling modules ("Customers also bought...")
-[ ] Enable promotional banners/pop-ups for sales and new arrivals
-[ ] Add prominent email list signup integration
-[ ] Add social sharing buttons to product pages
-[ ] Create interactive galleries/lookbooks with "Shop the Look" functionality
-4. Design & Aesthetics
-[ ] Use a modern, minimalist layout with ample white space
-[ ] Apply clean, legible typography throughout the site
-[ ] Establish clear visual hierarchy (font sizes, weights, spacing)
-[ ] Allow easy configuration of brand color palette (primary, secondary, accent)
-[ ] Add subtle animations and micro-interactions
-[ ] Use high-quality, consistent icons and illustrations
-[ ] Ensure prominent logo placement in header and footer
-[ ] Design an appealing homepage with hero section, headline, and CTAs
-5. Non-Functional Requirements
-[ ] Optimize theme for fast page load times (Core Web Vitals)
-[ ] Ensure full responsiveness (desktop, tablet, mobile)
-[ ] Use clean HTML, semantic tags, and schema markup for SEO
-[ ] Meet WCAG 2.1 AA accessibility guidelines
-[ ] Ensure scalability for more products and higher traffic
-[ ] Test for browser compatibility (Chrome, Firefox, Safari, Edge)
-[ ] Ensure compatibility with standard Shopify apps (reviews, email, POD fulfillment)
-6. Out of Scope (for reference)
-Customer-facing product customization tools
-Advanced AR features
-Multi-vendor marketplace functionality
-7. Future Considerations (Phase 2)
-[ ] Blog integration for content marketing
-[ ] Advanced personalization (recently viewed products)
-[ ] Loyalty program integration
-[ ] Gift card functionality
-
-- [x] Present product variants with intuitive UI (dropdowns, swatches, etc.) — Implemented in `sections/main-product.liquid` using TailwindCSS and Alpine.js. Color options use swatches, other options use dropdowns. See commit c709976.
-- [x] Add prominent, easy-to-understand size guides to apparel pages — Integrated as an expandable section with Alpine.js and TailwindCSS in `sections/main-product.liquid`. See commit a4b83a3.
+Shopify POD Store Theme PRD
+1. Theme Overview
+Purpose
+Create a modern, customizable theme specifically designed for Print-on-Demand stores
+Focus on product presentation, customization options, and seamless user experience
+Support for various POD products (apparel, accessories, home goods)
+Target Audience
+POD store owners
+Customers looking for customizable products
+Artists and designers selling their designs
+2. Core Features & Components
+A. Homepage Components
+Hero Section
+Full-width hero with background image/video
+Headline and subheadline
+CTA buttons (Shop Now, View Collection)
+Mobile-responsive design
+Apply to main-product...
+Featured Collections
+Grid layout of featured collections
+Collection images with overlay text
+Quick-view functionality
+Customizable grid size (2-4 columns)
+Product Showcase
+Featured products carousel
+Product quick-view
+"Best Sellers" section
+"New Arrivals" section
+Design Showcase
+Artist/designer spotlight
+Design categories
+Trending designs
+Custom design upload section
+B. Product Page Components
+Product Gallery
+Multiple product views
+Zoom functionality
+Color/material swatches
+360° view option
+Apply to main-product...
+Product Customization
+Color/material selector
+Size guide
+Design placement preview
+Custom text/image upload
+Design templates
+Product Information
+Detailed description
+Product specifications
+Care instructions
+Shipping information
+Size/material guide
+Social Proof
+Customer reviews
+Product ratings
+Photo reviews
+Trust badges
+C. Collection Page Components
+Collection Header
+Collection image
+Description
+Filter options
+Sort options
+Product Grid
+Customizable grid layout
+Quick-view functionality
+Filter sidebar
+Infinite scroll/pagination
+D. Cart & Checkout Components
+Cart Page
+Product preview
+Quantity adjuster
+Design preview
+Shipping calculator
+Promo code input
+Checkout Process
+Custom checkout fields
+Order summary
+Shipping options
+Payment methods
+Order confirmation
+3. Development Guide
+Step 1: Theme Setup
+Create theme structure:
+Apply to main-product...
+Set up theme settings:
+Apply to main-product...
+Step 2: Homepage Development
+Create hero section:
+Apply to main-product...
+Implement featured collections:
+Apply to main-product...
+Step 3: Product Page Development
+Create product gallery:
+Apply to main-product...
+Implement customization options:
+Apply to main-product...
+Step 4: Collection Page Development
+Create collection template:
+Apply to main-product...
+Step 5: Cart & Checkout Development
+Create cart template:
+Apply to main-product...
+4. Customization Options
+A. Design Customization
+Color Schemes
+Primary color
+Secondary color
+Accent colors
+Text colors
+Typography
+Font families
+Font sizes
+Line heights
+Letter spacing
+Layout Options
+Grid layouts
+Spacing
+Container widths
+Section padding
+B. Product Customization
+Design Upload
+File upload interface
+Design placement
+Color adjustments
+Text overlay
+Product Options
+Color/material selection
+Size selection
+Quantity
+Personalization
+5. Performance Optimization
+A. Image Optimization
+Lazy loading
+Responsive images
+WebP format support
+Image compression
+B. Code Optimization
+Minified CSS/JS
+Deferred loading
+Code splitting
+Cache management
+6. Testing & Quality Assurance
+A. Cross-browser Testing
+Chrome
+Firefox
+Safari
+Edge
+B. Device Testing
+Desktop
+Tablet
+Mobile
+Different screen sizes
+C. Performance Testing
+Page load speed
+Image loading
+Customization performance
+Checkout process
+7. Documentation
+A. Theme Documentation
+Installation guide
+Customization guide
+Feature documentation
+Troubleshooting guide
+B. User Documentation
+Store setup guide
+Product customization guide
+Order management guide
+FAQ

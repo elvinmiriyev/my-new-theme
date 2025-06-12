@@ -1,0 +1,46 @@
+{%- comment -%}
+Cart Page Section for POD Store
+{%- endcomment -%}
+<div class="cart-page" style="padding:2rem 0; max-width:900px; margin:0 auto;">
+  <h1 style="font-size:2rem; font-weight:700; margin-bottom:2rem;">Your Cart</h1>
+  <div class="cart-items" style="margin-bottom:2rem;">
+    {% for item in cart.items %}
+      <div class="cart-item" style="display:flex; gap:1rem; align-items:center; border-bottom:1px solid #eee; padding:1rem 0;">
+        <img src="{{ item.image | img_url: '200x' }}" alt="{{ item.title }}" style="width:80px; height:80px; object-fit:cover; border-radius:0.25rem;" width="80" height="80" />
+        <div class="item-details" style="flex:1;">
+          <h3 style="font-size:1.1rem; margin-bottom:0.25rem;">{{ item.title }}</h3>
+          <p style="color:#888; margin-bottom:0.5rem;">{{ item.price | money }}</p>
+          <input type="number" value="{{ item.quantity }}" min="1" style="width:60px; padding:0.25rem; border:1px solid #ccc; border-radius:0.25rem;" />
+          {% if section.settings.enable_design_preview %}
+            <!-- TODO: Add design preview for cart item -->
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% if section.settings.enable_shipping_calculator %}
+    <div class="shipping-calculator" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Shipping Calculator:</label>
+      <!-- TODO: Add shipping calculator UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_promo_code %}
+    <div class="promo-code" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Promo Code:</label>
+      <input type="text" placeholder="Enter promo code" style="margin-left:0.5rem; padding:0.25rem; border:1px solid #ccc; border-radius:0.25rem;" />
+      <!-- TODO: Add promo code apply logic -->
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Page",
+  "settings": [
+    { "type": "checkbox", "id": "enable_design_preview", "label": "Enable Design Preview in Cart", "default": true },
+    { "type": "checkbox", "id": "enable_shipping_calculator", "label": "Enable Shipping Calculator", "default": true },
+    { "type": "checkbox", "id": "enable_promo_code", "label": "Enable Promo Code Input", "default": true }
+  ],
+  "presets": [ { "name": "Cart Page" } ]
+}
+{% endschema %} 

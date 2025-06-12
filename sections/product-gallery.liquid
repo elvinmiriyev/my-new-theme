@@ -1,0 +1,30 @@
+{%- comment -%}
+Product Gallery Section for POD Store
+{%- endcomment -%}
+<div class="product-gallery" style="display:flex; flex-direction:column; gap:1.5rem; align-items:center;">
+  <div class="main-image" style="width:100%; max-width:500px;">
+    <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" style="width:100%; height:auto; border-radius:0.5rem;" width="800" height="800" />
+    {% if section.settings.enable_zoom %}
+      <!-- TODO: Add zoom functionality -->
+    {% endif %}
+    {% if section.settings.enable_360 %}
+      <!-- TODO: Add 360 view functionality -->
+    {% endif %}
+  </div>
+  <div class="thumbnail-list" style="display:flex; gap:0.5rem; justify-content:center;">
+    {% for image in product.images %}
+      <img src="{{ image | img_url: '200x' }}" alt="{{ image.alt }}" style="width:80px; height:80px; object-fit:cover; border-radius:0.25rem; cursor:pointer;" width="80" height="80" />
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Gallery",
+  "settings": [
+    { "type": "checkbox", "id": "enable_zoom", "label": "Enable Zoom", "default": true },
+    { "type": "checkbox", "id": "enable_360", "label": "Enable 360° View", "default": false }
+  ],
+  "presets": [ { "name": "Product Gallery" } ]
+}
+{% endschema %} 

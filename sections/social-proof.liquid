@@ -1,0 +1,41 @@
+{%- comment -%}
+Social Proof Section for POD Store
+{%- endcomment -%}
+<div class="social-proof" style="padding:2rem 0; max-width:700px; margin:0 auto;">
+  {% if section.settings.enable_reviews %}
+    <div class="customer-reviews" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Customer Reviews</h2>
+      <!-- TODO: Integrate reviews app or custom reviews display -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_ratings %}
+    <div class="product-ratings" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Product Ratings</h2>
+      <!-- TODO: Integrate ratings display -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_photo_reviews %}
+    <div class="photo-reviews" style="margin-bottom:1.5rem;">
+      <h2 style="font-size:1.25rem; font-weight:600; margin-bottom:0.5rem;">Photo Reviews</h2>
+      <!-- TODO: Integrate photo reviews display -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_trust_badges %}
+    <div class="trust-badges" style="margin-bottom:1.5rem;">
+      {% render 'trust-badges' %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "settings": [
+    { "type": "checkbox", "id": "enable_reviews", "label": "Enable Customer Reviews", "default": true },
+    { "type": "checkbox", "id": "enable_ratings", "label": "Enable Product Ratings", "default": true },
+    { "type": "checkbox", "id": "enable_photo_reviews", "label": "Enable Photo Reviews", "default": true },
+    { "type": "checkbox", "id": "enable_trust_badges", "label": "Enable Trust Badges", "default": true }
+  ],
+  "presets": [ { "name": "Social Proof" } ]
+}
+{% endschema %} 

@@ -1,0 +1,38 @@
+{%- comment -%}
+Collection Grid Section for POD Store
+{%- endcomment -%}
+<section class="collection-grid" style="padding:2rem 0; background:#fff;">
+  <div style="display:grid; grid-template-columns:repeat({{ section.settings.grid_columns }},1fr); gap:2rem; max-width:1200px; margin:0 auto;">
+    {% for product in collection.products %}
+      <div class="product-card" style="border:1px solid #eee; border-radius:0.5rem; padding:1rem; text-align:center; background:#fafbfc;">
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" style="width:100%; height:220px; object-fit:cover; margin-bottom:1rem;" width="400" height="220" />
+          <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">{{ product.title }}</h3>
+          <span style="color:#111827; font-weight:bold;">{{ product.price | money }}</span>
+        </a>
+        {% if section.settings.enable_quick_view %}
+          <!-- TODO: Add quick-view modal -->
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if section.settings.enable_infinite_scroll %}
+    <!-- TODO: Add infinite scroll functionality -->
+  {% endif %}
+  {% if section.settings.enable_filter_sidebar %}
+    <!-- TODO: Add filter sidebar UI -->
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    { "type": "range", "id": "grid_columns", "label": "Grid Columns", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "enable_quick_view", "label": "Enable Quick View", "default": true },
+    { "type": "checkbox", "id": "enable_infinite_scroll", "label": "Enable Infinite Scroll", "default": false },
+    { "type": "checkbox", "id": "enable_filter_sidebar", "label": "Enable Filter Sidebar", "default": false }
+  ],
+  "presets": [ { "name": "Collection Grid" } ]
+}
+{% endschema %} 

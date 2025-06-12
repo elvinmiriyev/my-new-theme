@@ -1,0 +1,38 @@
+{%- comment -%}
+Design Showcase Section for POD Store
+{%- endcomment -%}
+<section class="design-showcase" style="padding:3rem 1rem; background:#fff;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">Design Showcase</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2rem; max-width:1200px; margin:0 auto;">
+    {% for block in section.blocks %}
+      <div style="background:#f9fafb; border-radius:0.5rem; padding:1.5rem; text-align:center;">
+        <img src="{{ block.settings.image | img_url: '300x' }}" alt="{{ block.settings.name }}" style="width:120px; height:120px; object-fit:cover; border-radius:50%; margin-bottom:1rem;" width="120" height="120" />
+        <h3 style="font-size:1.1rem; margin-bottom:0.5rem;">{{ block.settings.name }}</h3>
+        <p style="color:#555; font-size:1rem; margin-bottom:1rem;">{{ block.settings.description }}</p>
+        {% if block.settings.upload_url %}
+          <a href="{{ block.settings.upload_url }}" style="display:inline-block; padding:0.5rem 1.5rem; background:#111827; color:#fff; border-radius:0.5rem; text-decoration:none; font-weight:bold;">Upload Design</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Design Showcase",
+  "blocks": [
+    {
+      "type": "designer",
+      "name": "Designer/Design",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Designer/Design Image" },
+        { "type": "text", "id": "name", "label": "Designer/Design Name" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "url", "id": "upload_url", "label": "Custom Upload Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "Design Showcase" } ]
+}
+{% endschema %} 

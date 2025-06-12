@@ -1,0 +1,52 @@
+{%- comment -%}
+Product Customizer Section for POD Store
+{%- endcomment -%}
+<div class="product-customizer" style="padding:2rem 0;">
+  <div class="color-options" style="margin-bottom:1.5rem;">
+    <label style="font-weight:600;">Color/Material:</label>
+    <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+      {% for option in product.options_with_values %}
+        {% if option.name == 'Color' or option.name == 'Material' %}
+          {% for value in option.values %}
+            <button class="color-swatch" style="width:32px; height:32px; border-radius:50%; border:2px solid #ccc; background:{{ value | downcase }}; cursor:pointer;" aria-label="{{ value }}"></button>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% if section.settings.enable_size_guide %}
+    <div class="size-guide" style="margin-bottom:1.5rem;">
+      <button type="button" style="font-weight:600; color:#111827; text-decoration:underline;" onclick="document.getElementById('size-guide-modal').style.display='block'">View Size Guide</button>
+      <div id="size-guide-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:2rem; border-radius:0.5rem; max-width:400px; margin:5vh auto;">
+          {% render 'size-guide' %}
+          <button type="button" style="margin-top:1rem;" onclick="document.getElementById('size-guide-modal').style.display='none'">Close</button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if section.settings.enable_design_preview %}
+    <div class="design-preview" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Design Preview:</label>
+      <!-- TODO: Add design preview UI -->
+    </div>
+  {% endif %}
+  {% if section.settings.enable_custom_upload %}
+    <div class="custom-upload" style="margin-bottom:1.5rem;">
+      <label style="font-weight:600;">Upload Your Design:</label>
+      <input type="file" accept="image/*" style="display:block; margin-top:0.5rem;" />
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product Customizer",
+  "settings": [
+    { "type": "checkbox", "id": "enable_size_guide", "label": "Enable Size Guide", "default": true },
+    { "type": "checkbox", "id": "enable_design_preview", "label": "Enable Design Preview", "default": true },
+    { "type": "checkbox", "id": "enable_custom_upload", "label": "Enable Custom Upload", "default": true }
+  ],
+  "presets": [ { "name": "Product Customizer" } ]
+}
+{% endschema %} 

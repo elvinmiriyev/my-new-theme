@@ -1,0 +1,37 @@
+{%- comment -%}
+Featured Collections Section for POD Store
+{%- endcomment -%}
+<section class="featured-collections" style="padding:3rem 1rem; background:#fff;">
+  <h2 style="text-align:center; font-size:2rem; margin-bottom:2rem;">Featured Collections</h2>
+  <div style="display:grid; grid-template-columns:repeat({{ section.settings.grid_size }},1fr); gap:2rem; max-width:1200px; margin:0 auto;">
+    {% for block in section.blocks %}
+      {% assign collection = collections[block.settings.collection] %}
+      {% if collection %}
+        <a href="{{ collection.url }}" style="display:block; position:relative; border-radius:0.5rem; overflow:hidden; box-shadow:0 2px 8px #0001;">
+          <img src="{{ collection.image | img_url: '600x' }}" alt="{{ collection.title }}" style="width:100%; height:220px; object-fit:cover;" width="600" height="220" />
+          <span style="position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); color:#fff; font-size:1.25rem; padding:1rem;">{{ collection.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collections",
+  "settings": [
+    { "type": "range", "id": "grid_size", "label": "Grid Columns", "min": 2, "max": 4, "step": 1, "default": 3 }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [ { "name": "Featured Collections" } ]
+}
+{% endschema %} 

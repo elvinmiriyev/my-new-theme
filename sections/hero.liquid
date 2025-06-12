@@ -1,29 +1,35 @@
 {%- comment -%}
-Hero Section
-PRD Features:
-- Impactful hero section (image/video), clear headline, prominent CTAs
+Hero Section for POD Store
 {%- endcomment -%}
-
-<section class="hero-section" style="text-align:center; padding: 3rem 1rem; background: #f9fafb;">
-  {% if section.settings.image != blank %}
-    <img src="{{ section.settings.image | img_url: '1200x' }}" alt="Hero Image" style="max-width:100%; height:auto; margin-bottom:2rem;" width="1200" height="600" />
+<section class="hero-section" style="position:relative; text-align:center; padding:4rem 1rem; background:#f9fafb;">
+  {% if section.settings.background_image != blank %}
+    <img src="{{ section.settings.background_image | img_url: '1600x' }}" alt="Hero Background" style="width:100%; height:auto; object-fit:cover; position:absolute; top:0; left:0; z-index:0; opacity:0.25;" width="1600" height="600" />
   {% endif %}
-  <h1 style="font-size:2.5rem; margin-bottom:1rem;">{{ section.settings.headline }}</h1>
-  <p style="font-size:1.25rem; margin-bottom:2rem; color:#555;">{{ section.settings.subheading }}</p>
-  {% if section.settings.cta_link != blank and section.settings.cta_label != blank %}
-    <a href="{{ section.settings.cta_link }}" class="hero-cta" style="display:inline-block; padding:1rem 2rem; background:#111827; color:#fff; border-radius:0.5rem; text-decoration:none; font-weight:bold;">{{ section.settings.cta_label }}</a>
-  {% endif %}
+  <div style="position:relative; z-index:1; max-width:700px; margin:0 auto;">
+    <h1 style="font-size:2.5rem; margin-bottom:1rem;">{{ section.settings.headline }}</h1>
+    <p style="font-size:1.25rem; margin-bottom:2rem; color:#555;">{{ section.settings.subheadline }}</p>
+    <div style="display:flex; gap:1rem; justify-content:center;">
+      {% if section.settings.cta1_label and section.settings.cta1_link %}
+        <a href="{{ section.settings.cta1_link }}" class="hero-cta" style="padding:1rem 2rem; background:#111827; color:#fff; border-radius:0.5rem; text-decoration:none; font-weight:bold;">{{ section.settings.cta1_label }}</a>
+      {% endif %}
+      {% if section.settings.cta2_label and section.settings.cta2_link %}
+        <a href="{{ section.settings.cta2_link }}" class="hero-cta" style="padding:1rem 2rem; background:#fff; color:#111827; border-radius:0.5rem; text-decoration:none; font-weight:bold; border:2px solid #111827;">{{ section.settings.cta2_label }}</a>
+      {% endif %}
+    </div>
+  </div>
 </section>
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "headline", "label": "Headline", "default": "Welcome to our store!" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Shop the latest products" },
-    { "type": "image_picker", "id": "image", "label": "Hero Image" },
-    { "type": "url", "id": "cta_link", "label": "CTA Link" },
-    { "type": "text", "id": "cta_label", "label": "CTA Label", "default": "Shop Now" }
+    { "type": "image_picker", "id": "background_image", "label": "Background Image" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Custom Designs for Every Style" },
+    { "type": "text", "id": "subheadline", "label": "Subheadline", "default": "High-quality prints on premium products" },
+    { "type": "text", "id": "cta1_label", "label": "CTA 1 Label", "default": "Shop Now" },
+    { "type": "url", "id": "cta1_link", "label": "CTA 1 Link" },
+    { "type": "text", "id": "cta2_label", "label": "CTA 2 Label", "default": "View Collection" },
+    { "type": "url", "id": "cta2_link", "label": "CTA 2 Link" }
   ],
   "presets": [ { "name": "Hero" } ]
 }
